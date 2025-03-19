@@ -1,0 +1,24 @@
+@{
+    ViewData["Title"] = "Giriş Yap";
+    Layout = "_Layout";
+}
+
+<h2>Log in</h2>
+
+<form method="post" action="/Login/Login">
+    <label>Firstname:</label>
+    <input type="text" name="firstName" required />
+    <br>
+    <br>
+    
+    <label>Surname:</label>
+    <input type="text" name="lastName" required />
+    <br>
+
+    <button type="submit" style="background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Log in</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <p style="color: red;">@ViewBag.Message</p>
+}

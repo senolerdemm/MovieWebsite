@@ -1,0 +1,67 @@
+@model WebApplication2.Models.Movie
+
+@{
+    ViewData["Title"] = "Movie Details";
+}
+@if(ViewBag.Message != null)
+{
+    <p style="color: red;">@ViewBag.Message</p>
+}
+
+
+
+@if (Model != null)
+{
+    <h2>@Model.Title</h2>
+    <p>Director: @Model.Director</p>
+    <p>Year: @Model.ReleaseYear</p>
+    <p>Rating: ⭐ @Model.Rating / 5</p>
+    @if (Model.Players != null && Model.Players.Any())
+    {
+        <p>Players:</p>
+        <ul>
+            @foreach (var player in Model.Players)
+            {
+                <li>@player</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No players available.</p>
+    }
+}
+else
+{
+    <div class="alert alert-warning">
+        <h2>Error</h2>
+        <p>Please Specify Movie ID .</p>
+        <a href="@Url.Action("Index", "HomePage")" class="btn btn-primary">Return to Home Page</a>
+    </div>
+}
+@if (Model != null && !string.IsNullOrEmpty(Model.ImageUrl))
+{
+    <img src="@Model.ImageUrl" alt="@Model.Title" width="200" />
+}
+else
+{
+    <p>No image available.</p>
+}
+
+
+
+<br><br>
+@if (Model != null)
+{
+    <a href="/Movie/AddToCart/@Model.MovieId">Add to Cart</a>
+
+}else{
+    <p>Please Specify Movie ID</p>
+}
+<br>
+<a href="/HomePage" style="text-decoration: none; color: blue;">Home Page</a> |
+<a href="/Cart" style="text-decoration: none; color: blue;">🛒 See Card</a>
+@if(!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <p style="color: red;">@ViewBag.Message</p>
+}
